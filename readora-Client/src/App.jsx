@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div className='bg-green-400 min-h-screen w-full flex'>
+    <div className='bg-vanila min-h-screen w-full flex'>
       
     </div>
   )
