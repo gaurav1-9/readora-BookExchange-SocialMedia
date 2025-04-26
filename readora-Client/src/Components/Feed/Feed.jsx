@@ -2,6 +2,7 @@ import React from 'react'
 import CreatePost from './CreatePost'
 import NoPost from './NoPost'
 import FeedPost from './FeedPost'
+import CaughtUp from './CaughtUp'
 
 const Feed = () => {
     const post = [
@@ -38,8 +39,9 @@ const Feed = () => {
         <div className="flex-2 p-2 lg:pt-10">
             <CreatePost />
             {
-                (post.length === 0) ? <NoPost /> : <FeedPost postList={post} />
+                (post.length === 0) ? <NoPost /> : <><FeedPost postList={post} /><CaughtUp /></>
             }
+            
         </div>
     )
 }

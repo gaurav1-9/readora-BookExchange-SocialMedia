@@ -8,7 +8,7 @@ import Logo from '../Logo';
 
 const Utilities = () => {
     return (
-        <div className="hidden flex-1 h-full items-center pt-10 lg:flex flex-col">
+        <div className="hidden flex-1 h-screen sticky top-0 items-center pt-10 lg:flex flex-col">
             <Logo />
             <div className="w-8/9 h-fit bg-gunMetal p-4 rounded-xl mt-6">
                 <ul className='flex flex-col gap-3'>

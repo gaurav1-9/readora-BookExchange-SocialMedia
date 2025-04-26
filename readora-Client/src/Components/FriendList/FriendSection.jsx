@@ -32,7 +32,7 @@ const FriendSection = () => {
         },
     ]
     return (
-        <div className="hidden flex-1 h-full items-center pt-10 lg:flex flex-col">
+        <div className="hidden flex-1 h-screen sticky top-0 items-center pt-10 lg:flex flex-col">
             <div className="relative w-8/9 mb-4">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xl text-babyPowder">
                     <MdSearch />
