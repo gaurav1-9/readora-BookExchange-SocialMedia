@@ -1,12 +1,12 @@
 import React from 'react'
 import Utilities from './Utilities'
-import Feed from './Feed'
+import Feed from '../Feed/Feed'
 import FriendSection from '../FriendList/FriendSection'
 
 const HomePage = () => {
   return (
     <div className='flex w-screen'>
-      <Utilities />
+      <Utilities/>
       <Feed />
       <FriendSection />
     </div>

@@ -14,7 +14,7 @@ const FriendList = ({ list }) => {
                 list.map((item, index) => (
                     <div key={index} className='flex p-2 rounded-xl justify-between items-center'>
                         <div className='flex' onClick={() => console.log(item)}>
-                            <img key={index} src={item.profilePic} alt="Friend" className="w-10 h-10 rounded-full cursor-pointer" />
+                            <img key={index} src={item.profilePic} alt="Friend" className="w-10 h-10 rounded-full cursor-pointer" draggable='false'/>
                             <div className='flex flex-col pl-2'>
                                 <p className='leading-4 font-semibold text-lg text-babyPowder cursor-pointer hover:text-tomato'>{item.username}</p>
                                 <p className='text-sm text-babyPowder'>{item.name}</p>
