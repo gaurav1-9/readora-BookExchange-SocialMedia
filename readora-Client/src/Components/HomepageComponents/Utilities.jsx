@@ -11,25 +11,25 @@ const Utilities = () => {
         >
             <div className="sticky w-5/6 h-fit bg-gunMetal p-4 rounded-xl">
                 <ul className='flex flex-col gap-3'>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700'>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700' onClick={()=>console.log("account")}>
                         <div className='flex gap-2 items-center'>
                             <HiUserCircle />
                             Account
                         </div>
                     </li>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700'>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700' onClick={()=>console.log("home")}>
                         <div className='flex gap-2 items-center'>
                             <FaHome />
                             Home
                         </div>
                     </li>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700'>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700' onClick={()=>console.log("feed")}>
                         <div className='flex gap-2 items-center'>
                             <CgFeed />
                             Feed
                         </div>
                     </li>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700'>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-zinc-700' onClick={()=>console.log("logout")}>
                         <div className='flex gap-2 items-center'>
                             <IoLogOut />
                             Log Out
