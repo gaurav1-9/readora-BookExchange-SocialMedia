@@ -3,6 +3,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { FaHome } from "react-icons/fa";
 import { CgFeed } from "react-icons/cg";
 import { IoLogOut } from "react-icons/io5";
+import { MdMessage } from "react-icons/md";
 import Logo from '../../Logo';
 
 const Utilities = () => {
@@ -15,6 +16,12 @@ const Utilities = () => {
                         <div className='flex gap-2 items-center'>
                             <HiUserCircle />
                             Account
+                        </div>
+                    </li>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal' onClick={()=>console.log("chat")}>
+                        <div className='flex gap-2 items-center'>
+                            <MdMessage />
+                            Chats
                         </div>
                     </li>
                     <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal' onClick={()=>console.log("home")}>

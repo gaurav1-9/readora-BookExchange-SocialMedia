@@ -2,7 +2,7 @@ import React from 'react'
 
 const Feed = () => {
     return (
-        <div className="flex-2 h-full bg-babyPowder"></div>
+        <div className="flex-2 h-full"></div>
     )
 }
 
