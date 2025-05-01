@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
+const authRoute = require('./Routes/auth')
+const userRoute = require('./Routes/users')
+
 dotenv.config()
 
 mongoose.connect(process.env.MONGO_URL)
@@ -14,5 +17,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json())
 app.use(morgan('tiny'))
 app.use(helmet())
+
+app.use("/api/auth",authRoute)
+app.use("/api/users",userRoute)
 
 app.listen(5000, ()=>console.log("Server running on PORT 5000..."))
