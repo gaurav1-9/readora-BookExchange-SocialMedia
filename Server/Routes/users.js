@@ -25,6 +25,50 @@ router.get("/:id", async (req, res) => {
 
 //update
 //follow user
+router.put("/:id/follow", async (req, res) => {
+    const currentUserID = req.body.id;
+    const targetUserID = req.params.id;
+
+    if (currentUserID === targetUserID) res.status(400).json({
+        err: true,
+        msg: "Cannot follow yourself",
+    })
+
+    try {
+        const currentUser = await userSchema.findById(currentUserID)
+        const targetUser = await userSchema.findById(targetUserID)
+
+        if (!currentUser || !targetUser)
+            return res.status(404).json({
+                err: true,
+                msg: "No user found",
+            })
+
+        if (targetUser.followers.includes(currentUser._id)) {
+            res.status(400).json({
+                err: true,
+                msg: "You already follow this user",
+            })
+        } else {
+            currentUser.followings.push(targetUser._id);
+            targetUser.followers.push(currentUser._id);
+
+            await targetUser.save()
+            await currentUser.save()
+
+            res.status(200).json({
+                err: false,
+                msg: `${targetUser.username} followed`
+            })
+        }
+
+    } catch (err) {
+        res.status(500).json({
+            err: true,
+            msg: "There was an error"
+        });
+    }
+})
 //unfollow user
 
 //show followers
