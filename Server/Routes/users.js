@@ -24,6 +24,37 @@ router.get("/:id", async (req, res) => {
 });
 
 //update
+router.put("/:id", async (req, res) => {
+    const userIdUpdate = req.params.id
+    const currentUserIdUpdate = req.body.id
+
+    if (userIdUpdate !== currentUserIdUpdate) return res.status(403).json({
+        err: true,
+        msg: "You can edit only your account"
+    })
+
+    try {
+        const updatedUser = await userSchema.findByIdAndUpdate(
+            userIdUpdate,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
+
+        const { password, __v, ...userWithoutSensitiveData } = updatedUser._doc;
+
+        res.status(200).json({
+            err: false,
+            msg: "User updated successfully",
+            user: userWithoutSensitiveData,
+        });
+    } catch (err) {
+        res.status(500).json({
+            err: true,
+            msg: "Update failed",
+        });
+    }
+})
+
 //follow user
 router.put("/:id/follow", async (req, res) => {
     const currentUserID = req.body.id;

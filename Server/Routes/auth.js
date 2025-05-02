@@ -8,7 +8,7 @@ router.post("/register", async (req, res) => {
         const savedUser = await newUser.save();
         res.status(200).json({
             err: false,
-            msg: "user saved successfully"
+            msg: "user registered successfully"
         })
         console.log(savedUser);
     } catch (err) {
@@ -50,7 +50,8 @@ router.post("/login", async(req,res)=>{
         res.status(200).json({
             isValidated: true,
             err: false,
-            msg: user,
+            msg: "Login Succesfull",
+            user: user
         })
     }catch(err){
         res.status(500).json({
