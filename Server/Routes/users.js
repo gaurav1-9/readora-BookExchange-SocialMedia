@@ -69,7 +69,53 @@ router.put("/:id/follow", async (req, res) => {
         });
     }
 })
+
 //unfollow user
+router.put("/:id/unfollow", async (req, res) => {
+    const currentUserID = req.body.id;
+    const targetUserID = req.params.id;
+
+    if (currentUserID === targetUserID) res.status(400).json({
+        err: true,
+        msg: "Cannot unfollow yourself",
+    })
+
+    try {
+        const currentUser = await userSchema.findById(currentUserID)
+        const targetUser = await userSchema.findById(targetUserID)
+
+        if (!currentUser || !targetUser)
+            return res.status(404).json({
+                err: true,
+                msg: "No user found",
+            })
+
+        if (!targetUser.followers.includes(currentUser._id)) {
+            res.status(400).json({
+                err: true,
+                msg: "You do not follow this user",
+            })
+        } else {
+            currentUser.followings.pull(targetUser._id);
+            targetUser.followers.pull(currentUser._id);
+
+            await targetUser.save()
+            await currentUser.save()
+
+            res.status(200).json({
+                err: false,
+                msg: `${targetUser.username} unfollowed`
+            })
+        }
+
+    } catch (err) {
+        res.status(500).json({
+            err: true,
+            msg: "There was an error"
+        });
+    }
+})
+
 
 //show followers
 router.get("/:id/followers", async (req, res) => {
