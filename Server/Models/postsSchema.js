@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema(
         caption: {
             type: String,
             max: 500,
+            required: true,
         },
         img: {
             type: String,
@@ -21,6 +22,7 @@ const PostSchema = new mongoose.Schema(
         tags: {
             type: [String],
             default: [],
+            required: true,
         },
     },
     {
