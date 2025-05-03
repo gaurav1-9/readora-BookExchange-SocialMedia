@@ -106,7 +106,7 @@ router.put("/:id/unfollow", async (req, res) => {
     const currentUserID = req.body.id;
     const targetUserID = req.params.id;
 
-    if (currentUserID === targetUserID) res.status(400).json({
+    if (currentUserID === targetUserID) return res.status(400).json({
         err: true,
         msg: "Cannot unfollow yourself",
     })
@@ -122,7 +122,7 @@ router.put("/:id/unfollow", async (req, res) => {
             })
 
         if (!targetUser.followers.includes(currentUser._id)) {
-            res.status(400).json({
+            return res.status(400).json({
                 err: true,
                 msg: "You do not follow this user",
             })
