@@ -32,20 +32,27 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.post("/login", async(req,res)=>{
-    const {username, password} = req.body;
-    try{
-        const user = await UserSchema.findOne({username});
-        if(!user) res.status(400).json({
+router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await UserSchema.findOne({ username });
+        if (!user) res.status(400).json({
             isValidated: false,
             err: false,
             msg: "Invalid username or password",
         })
-        if(user.password !== password) res.status(400).json({
+        if (user.password !== password) res.status(400).json({
             isValidated: false,
             err: false,
             msg: "Incorrect password",
         })
+
+        //saving user session
+        req.session.user = {
+            id: user._id,
+            name: user.name,
+            username: user.username,
+        }
 
         res.status(200).json({
             isValidated: true,
@@ -53,7 +60,7 @@ router.post("/login", async(req,res)=>{
             msg: "Login Succesfull",
             user: user
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
             err: true,
             msg: "Internal Server Error"
