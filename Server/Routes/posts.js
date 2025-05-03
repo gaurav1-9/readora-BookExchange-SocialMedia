@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const PostSchema = require('../Models/postsSchema')
+const PostSchema = require('../Models/postsSchema');
+const UserSchema = require('../Models/userSchema');
 
 router.get("/", (req, res) => {
     res.send({
@@ -26,17 +27,59 @@ router.post("/upload", async (req, res) => {
 })
 
 //edit post
+router.put("/:postId/edit", async (req, res) => {
+    try {
+        const post = await PostSchema.findById(req.params.postId)
+        const user = await UserSchema.findById(req.body.userId)
+
+        if (!post) return res.status(404).json({
+            err: true,
+            msg: "No post found"
+        })
+        if (!user) return res.status(404).json({
+            err: true,
+            msg: "No user found"
+        })
+
+        if (post.userId !== user._id.toString()) return res.status(403).json({
+            err: true,
+            msg: "You can edit only your posts"
+        })
+
+        const { caption, img, tags } = req.body
+        if (caption) post.caption = caption
+        if (img) post.img = img
+        if (tags) post.tags = tags
+
+        await post.save()
+        res.status(200).json({
+            err:false,
+            msg:"Post updated sucessully",post
+        })
+    } catch (err) {
+        res.status(500).json({
+            err: true,
+            msg: "Could'nt edit post; Server Error"
+        })
+    }
+})
+
 //delete post
 router.delete("/:postId/deletePost", async (req, res) => {
     try {
         const postId = await PostSchema.findById(req.params.postId)
+        const validUser = await UserSchema.findById(req.body.userId)
 
-        if (!postId) return res.status(400).json({
+        if (!validUser) return res.status(404).json({
+            err: true,
+            msg: "No user found"
+        })
+        if (!postId) return res.status(404).json({
             err: true,
             msg: "No post found"
         })
 
-        if (postId.userId !== req.body.userId) return res.status(400).json({
+        if (postId.userId !== validUser._id.toString()) return res.status(400).json({
             err: true,
             msg: "You can delete only your posts"
         })
@@ -58,21 +101,26 @@ router.delete("/:postId/deletePost", async (req, res) => {
 router.put("/:postId/engage", async (req, res) => {
     try {
         const postId = await PostSchema.findById(req.params.postId);
-        const userId = req.body.userId
+        const userId = await UserSchema.findById(req.body.userId)
+
+        if (!userId) return res.status(404).json({
+            err: true,
+            msg: "No user found"
+        })
         if (!postId) return res.status(404).json({
             err: true,
             msg: "No post found"
         })
 
-        if (!postId.likes.includes(userId)) {
-            postId.likes.push(userId)
+        if (!postId.likes.includes(userId._id.toString())) {
+            postId.likes.push(userId._id.toString())
             await postId.save()
             return res.status(200).json({
                 err: false,
                 msg: "Post liked"
             })
         } else {
-            postId.likes.pull(userId)
+            postId.likes.pull(userId._id.toString())
             await postId.save()
             return res.status(200).json({
                 err: false,
