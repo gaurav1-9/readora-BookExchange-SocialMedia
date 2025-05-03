@@ -36,7 +36,7 @@ const Feed = () => {
         },
     ]
     return (
-        <div className="flex-2 p-2 lg:pt-10">
+        <div className="p-2 lg:pt-10">
             <CreatePost />
             {
                 (post.length === 0) ? <NoPost /> : <><FeedPost postList={post} /><CaughtUp /></>

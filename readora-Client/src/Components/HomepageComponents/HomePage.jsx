@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import Utilities from './Utilities'
 import Feed from '../Feed/Feed'
 import FriendSection from '../FriendList/FriendSection'
+import Account from '../Account/Account'
+import Chats from '../Chats/Chats'
 
 const HomePage = () => {
   return (
@@ -12,10 +14,8 @@ const HomePage = () => {
       <div className='flex-2'>
         <Routes>
           <Route path="/" element={<Feed />} />
-
-          {/* Add more routes for different sections */}
-          {/* <Route path="/account" element={<Account />} /> */}
-          {/* You can add other routes like /chat, /profile, etc. */}
+          <Route path="/account" element={<Account />} />
+          <Route path="/chats" element={<Chats />} />
         </Routes>
       </div>
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { HiUserCircle } from "react-icons/hi"
 import { FaHome } from "react-icons/fa"
-import { CgFeed } from "react-icons/cg"
 import { IoLogOut } from "react-icons/io5"
 import { MdMessage } from "react-icons/md"
 import Logo from '../Logo'
@@ -20,7 +19,7 @@ const Utilities = () => {
             </Link>
           </li>
           <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
-            <Link to="/chat" className="flex gap-2 items-center">
+            <Link to="/chats" className="flex gap-2 items-center">
               <MdMessage />
               Chats
             </Link>
