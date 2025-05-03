@@ -36,23 +36,19 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await UserSchema.findOne({ username });
-        if (!user) res.status(400).json({
+        if (!user) return res.status(400).json({
             isValidated: false,
             err: false,
             msg: "Invalid username or password",
         })
-        if (user.password !== password) res.status(400).json({
+        if (user.password !== password) return res.status(400).json({
             isValidated: false,
             err: false,
             msg: "Incorrect password",
         })
 
         //saving user session
-        req.session.user = {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-        }
+        req.session.user = user._id
 
         res.status(200).json({
             isValidated: true,
