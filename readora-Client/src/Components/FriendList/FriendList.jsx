@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaUserFriends } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 const FriendList = ({ list }) => {
@@ -20,7 +19,6 @@ const FriendList = ({ list }) => {
                                 <p className='text-sm text-babyPowder'>{item.name}</p>
                             </div>
                         </div>
-                        <MdMessage className='text-2xl mt-2 text-babyPowder cursor-pointer hover:text-tomato' />
                     </div>
                 ))
             }
