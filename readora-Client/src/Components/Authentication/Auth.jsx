@@ -12,7 +12,7 @@ const Auth = () => {
                 <img src="/Fingerprint-cuate.png" alt="AuthImg" className='w-3/4'/>
             </div>
             <div className="h-3/4 flex flex-2 flex-col justify-center items-start">
-                <div className="mb-4">
+                <div className="mb-4 ml-13">
                     <Logo />
                 </div>
                 <Routes>
