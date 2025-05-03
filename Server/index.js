@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const authRoute = require('./Routes/auth')
 const userRoute = require('./Routes/users')
 const postRoute = require('./Routes/posts')
+const chatRoute = require('./Routes/chats')
 
 dotenv.config()
 
@@ -22,5 +23,6 @@ app.use(helmet())
 app.use("/api/auth",authRoute)
 app.use("/api/users",userRoute)
 app.use("/api/posts",postRoute)
+app.use("/api/chats",chatRoute)
 
 app.listen(5000, ()=>console.log("Server running on PORT 5000..."))
