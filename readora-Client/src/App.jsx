@@ -30,7 +30,7 @@ const App = () => {
     <div className='bg-vanila min-h-screen w-full flex'>
       <Routes>
         <Route path="/" element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />} />
-        <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <Auth />} />
+        <Route path="/*" element={isLoggedIn ? <Navigate to="/" /> : <Auth />} />
       </Routes>
     </div>
   )
