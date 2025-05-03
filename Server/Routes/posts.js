@@ -53,8 +53,8 @@ router.put("/:postId/edit", async (req, res) => {
 
         await post.save()
         res.status(200).json({
-            err:false,
-            msg:"Post updated sucessully",post
+            err: false,
+            msg: "Post updated sucessully", post
         })
     } catch (err) {
         res.status(500).json({
@@ -159,5 +159,32 @@ router.get("/:id/profilePost", async (req, res) => {
 })
 
 //home feed post(by following users)
+router.get("/:userId/timeline", async (req, res) => {
+    try {
+        const currentUser = await UserSchema.findById(req.params.userId)
+
+        if(!currentUser) return res.status(404).json({
+            err: true,
+            msg: "No user found"
+        })
+
+        const feedPost = await Promise.all(
+            currentUser.followings.map(followedUser =>(
+                PostSchema.find({userId: followedUser})
+            ))
+        );
+        const timelinePost = [].concat(...feedPost).sort((a, b) => b.createdAt - a.createdAt)
+        res.status(200).json({
+            err:false,
+            msg: timelinePost
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            err: true,
+            msg: "Could'nt load feed"
+        })
+    }
+})
 
 module.exports = router
