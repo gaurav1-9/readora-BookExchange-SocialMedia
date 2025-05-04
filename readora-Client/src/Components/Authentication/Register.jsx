@@ -15,15 +15,10 @@ const Register = () => {
         e.preventDefault()
         setError('')
         try {
-            console.log(name)
-            console.log(username)
-            console.log(email)
-            console.log(password)
-            const res = await axios.post('/auth/register', {
-                name, email, username, password
+            const res = await axios.post('http://localhost:5000/api/auth/register', {
+                name:name, email:email, username:username, password:password
             }, { withCredentials: true })
-
-            if (res.data?.success) {
+            if (!res.data?.err) {
                 navigate('/login')
             } else {
                 setError('Registration failed.')
