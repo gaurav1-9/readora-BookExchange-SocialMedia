@@ -9,7 +9,6 @@ const Account = () => {
 
   useEffect(() => {
     if (user) {
-      // Fetch the profile data only if the user is logged in
       axios.get(`http://localhost:5000/api/users/${user}`, { withCredentials: true })
         .then(res => {
           setProfile(res.data?.msg)
@@ -18,10 +17,10 @@ const Account = () => {
           console.error(err)
         })
     }
-  }, [user])  // Run this effect whenever `user` changes
+  }, [user])
 
   return (
-    <div>
+    <div className='mx-20 mt-10'>
       {
         profile ? <Profile profileDetails={profile} />
           : (
