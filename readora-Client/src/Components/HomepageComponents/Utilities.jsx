@@ -1,12 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HiUserCircle } from "react-icons/hi"
 import { FaHome } from "react-icons/fa"
 import { IoLogOut } from "react-icons/io5"
 import { MdMessage } from "react-icons/md"
+import axios from 'axios'
+import { useAuth } from '../../AuthContext'
 import Logo from '../Logo'
 
 const Utilities = () => {
+  const navigate = useNavigate()
+  const { setIsLoggedIn } = useAuth()
+
+  const handleLogOut = async () => {
+    try {
+      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true })
+      setIsLoggedIn(false)
+      navigate('/login')
+    } catch (err) {
+      console.error('Logout failed', err)
+    }
+  }
+
   return (
     <div className="hidden flex-1 h-screen sticky top-0 items-center pt-10 lg:flex flex-col">
       <Logo />
@@ -30,7 +45,10 @@ const Utilities = () => {
               Home
             </Link>
           </li>
-          <li className='flex gap-2 items-center p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+          <li
+            className='flex gap-2 items-center p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'
+            onClick={handleLogOut}
+          >
             <IoLogOut />
             Log Out
           </li>

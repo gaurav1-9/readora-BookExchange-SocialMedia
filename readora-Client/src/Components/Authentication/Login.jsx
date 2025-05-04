@@ -15,18 +15,15 @@ const Login = () => {
         e.preventDefault()
         setError('')
         try {
-            console.log(username)
-            console.log(password)
             const res = await axios.post('http://localhost:5000/api/auth/login',
                 { username, password },
                 { withCredentials: true })
-            console.log(res.data)
-            if (!res.data.err) {
-                setIsLoggedIn(true)
-                navigate('/')
-            } else {
-                setError('Login failed.')
-            }
+                if (!res.data.err) {
+                    setIsLoggedIn(true)
+                    navigate('/')
+                } else {
+                    setError('Login failed.')
+                }
         } catch (err) {
             setError('Invalid username or password.')
         }

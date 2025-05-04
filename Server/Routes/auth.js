@@ -48,8 +48,8 @@ router.post("/login", async (req, res) => {
         })
 
         //saving user session
-        req.session.user = user._id
-
+        req.session.user = user._id.toString()
+        console.log("Session after login:", req.session)
         res.status(200).json({
             isValidated: true,
             err: false,
@@ -63,5 +63,28 @@ router.post("/login", async (req, res) => {
         })
     }
 })
+
+router.get('/session', (req, res) => {
+    if (req.session.user) {
+        res.json({
+            user: req.session.user,
+            sessionId: req.sessionID // send this only for debugging
+        })
+    } else {
+        res.status(401).json({ message: 'Not authenticated' })
+    }
+})
+
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Logout error:', err)
+            return res.status(500).json({ err: true, msg: 'Logout failed' })
+        }
+        res.clearCookie('connect.sid') // optional: clears cookie in browser
+        res.status(200).json({ err: false, msg: 'Logged out successfully' })
+    })
+})
+
 
 module.exports = router

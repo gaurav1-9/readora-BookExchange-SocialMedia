@@ -13,7 +13,9 @@ const App = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get('/auth/session', { withCredentials: true })
+    axios.get('http://localhost:5000/api/auth/session',
+      { withCredentials: true }
+    )
       .then(res => {
         if (res.data?.user) {
           setIsLoggedIn(true)
@@ -35,9 +37,9 @@ const App = () => {
     <div className='bg-vanila min-h-screen w-full flex'>
       <Routes>
         <Route path="/" element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}>
-          <Route index element={<Feed/>} />
-          <Route path="account" element={<Account />} />
-          <Route path="chats" element={<Chats />} />
+          <Route index element={<Feed />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/chats" element={<Chats />} />
         </Route>
 
         <Route path="/*" element={isLoggedIn ? <Navigate to="/" /> : <Auth />} />
