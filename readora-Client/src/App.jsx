@@ -11,6 +11,7 @@ import Chats from './Components/Chats/Chats'
 const App = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth()
   const [loading, setLoading] = useState(true)
+  
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/auth/session',
@@ -19,6 +20,7 @@ const App = () => {
       .then(res => {
         if (res.data?.user) {
           setIsLoggedIn(true)
+          console.log(res.data)
         } else {
           setIsLoggedIn(false)
         }
