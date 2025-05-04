@@ -9,29 +9,27 @@ import Account from './Components/Account/Account'
 import Chats from './Components/Chats/Chats'
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth()
+  const { isLoggedIn, setIsLoggedIn, setUser } = useAuth()  // Use setUser for the whole user object
   const [loading, setLoading] = useState(true)
-  
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/auth/session',
-      { withCredentials: true }
-    )
+    axios.get('http://localhost:5000/api/auth/session', { withCredentials: true })
       .then(res => {
         if (res.data?.user) {
           setIsLoggedIn(true)
-          console.log(res.data)
+          setUser(res.data.user)  // Set the entire user object
         } else {
           setIsLoggedIn(false)
+          setUser(null)  // Clear user if not logged in
         }
         setLoading(false)
       })
       .catch(() => {
         setIsLoggedIn(false)
+        setUser(null)  // Clear user if session check fails
         setLoading(false)
       })
-  }, [setIsLoggedIn])
-
+  }, [setIsLoggedIn, setUser])
 
   if (loading) return <div>Loading...</div>
 
@@ -46,7 +44,6 @@ const App = () => {
 
         <Route path="/*" element={isLoggedIn ? <Navigate to="/" /> : <Auth />} />
       </Routes>
-
     </div>
   )
 }

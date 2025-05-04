@@ -10,12 +10,13 @@ import Logo from '../Logo'
 
 const Utilities = () => {
   const navigate = useNavigate()
-  const { setIsLoggedIn } = useAuth()
+  const { setIsLoggedIn, setUser } = useAuth()
 
   const handleLogOut = async () => {
     try {
       await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true })
       setIsLoggedIn(false)
+      setUser(null)
       navigate('/login')
     } catch (err) {
       console.error('Logout failed', err)
