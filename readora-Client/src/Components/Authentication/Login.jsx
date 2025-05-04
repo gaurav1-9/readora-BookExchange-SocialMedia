@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '../../AuthContext'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -8,6 +9,7 @@ const Login = () => {
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
+    const { setIsLoggedIn } = useAuth()
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -15,8 +17,12 @@ const Login = () => {
         try {
             console.log(username)
             console.log(password)
-            const res = await axios.post('/auth/login', { username, password }, { withCredentials: true })
-            if (res.data?.isValidated) {
+            const res = await axios.post('http://localhost:5000/api/auth/login',
+                { username, password },
+                { withCredentials: true })
+            console.log(res.data)
+            if (!res.data.err) {
+                setIsLoggedIn(true)
                 navigate('/')
             } else {
                 setError('Login failed.')
