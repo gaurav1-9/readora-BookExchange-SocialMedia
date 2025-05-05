@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ProfileDetails = ({profileDetails}) => {
-  return (
-    <>
-        <div className="flex items-center justify-between mb-6 gap-20 w-3/5">
+const ProfileDetails = ({ profileDetails }) => {
+    return (
+        <div className="flex flex-col items-center bg-gunMetal text-babyPowder rounded-xl py-6 w-full shadow-lg">
+            <div className="flex items-center justify-between mb-6 gap-20 w-3/5">
                 <img
                     src={
                         (profileDetails.profilePic !== "" || profileDetails.profilePic !== " ")
@@ -33,8 +33,9 @@ const ProfileDetails = ({profileDetails}) => {
                 <p className="text-xl font-semibold">@{profileDetails.username}</p>
                 <p className="text-lg text-gray-300">{profileDetails.name}</p>
             </div>
-    </>
-  )
+        </div>
+
+    )
 }
 
 export default ProfileDetails

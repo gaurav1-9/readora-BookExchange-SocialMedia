@@ -1,11 +1,14 @@
 import React from 'react'
 import ProfileDetails from './ProfileDetails'
+import UserPosts from './UserPosts'
 
 const Profile = ({ profileDetails }) => {
     return (
-        <div className="flex flex-col items-center bg-gunMetal text-babyPowder rounded-xl py-6 w-full shadow-lg">
+        <div>
             <ProfileDetails profileDetails={profileDetails}/>
+            <UserPosts/>
         </div>
+
     )
 }
 
