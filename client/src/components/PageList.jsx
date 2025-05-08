@@ -16,15 +16,15 @@ const PageList = () => {
             <Logo />
             <div className="w-8/9 h-fit bg-gunMetal p-4 rounded-xl mt-6">
                 <ul className='flex flex-col gap-3'>
-                    <li className='flex gap-2 p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                    <li className='flex gap-2 items-center p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
                         <HiUserCircle />
                         Account
                     </li>
-                    <li className='flex gap-2 p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                    <li className='flex gap-2 items-center p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
                         <MdMessage />
                         Chats
                     </li>
-                    <li className='flex gap-2 p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                    <li className='flex gap-2 items-center p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
                         <FaHome />
                         Home
                     </li>
