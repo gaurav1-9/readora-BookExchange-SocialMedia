@@ -8,7 +8,9 @@ import Register from './pages/Register'
 import Feed from './pages/Feed'
 import Profile from './pages/Profile'
 import Chats from './pages/Chats'
+import Following from './pages/Following'
 import axios from 'axios'
+import Followers from './pages/Followers'
 
 const App = () => {
   const { isLoggedIn, setIsLoggedIn, setUser, user } = useAuth()
@@ -42,6 +44,8 @@ const App = () => {
               <Route index element={<Feed />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/chats" element={<Chats />} />
+              <Route path="/followings" element={<Following />} />
+              <Route path="/followers" element={<Followers />} />
             </Route>
             <Route path='/auth' element={(isLoggedIn) ? <Navigate to="/" replace /> : <Authentication />}>
               <Route index element={<Navigate to="login" replace />} />
