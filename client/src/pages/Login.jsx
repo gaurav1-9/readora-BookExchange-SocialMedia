@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../AuthContext'
+import axios from 'axios'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -7,14 +9,25 @@ const Login = () => {
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  const { setUser, setIsLoggedIn, user } = useAuth()
 
   const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
-    console.log(username)
-    console.log(password)
-    setUsername('')
-    setPassword('')
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login',
+        { username, password },
+        { withCredentials: true })
+      if (!res.data.err) {
+        setUser(res.data.user)
+        setIsLoggedIn(true)
+        navigate('/')
+      } else {
+        setError('Login failed.')
+      }
+    } catch (err) {
+      setError('Invalid username or password.')
+    }
   }
 
   const navigateToReg = () => {
@@ -33,7 +46,7 @@ const Login = () => {
       />
       <div className="relative flex items-center">
         <input
-          className={`mb-4 p-2 w-full border rounded-xl outline-none pr-8 ${!showPassword? 'font-extrabold tracking-widest': 'font-normal'} placeholder:tracking-normal placeholder:font-normal`}
+          className={`mb-4 p-2 w-full border rounded-xl outline-none pr-8 ${!showPassword ? 'font-extrabold tracking-widest' : 'font-normal'} placeholder:tracking-normal placeholder:font-normal`}
           type={(showPassword) ? "text" : "password"}
           placeholder="Password"
           value={password}
