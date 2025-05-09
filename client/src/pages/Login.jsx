@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
-  const { setUser, setIsLoggedIn, user } = useAuth()
+  const { setUser, setIsLoggedIn } = useAuth()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -21,7 +21,7 @@ const Login = () => {
       if (!res.data.err) {
         setUser(res.data.user)
         setIsLoggedIn(true)
-        navigate('/')
+        navigate('/profile')
       } else {
         setError('Login failed.')
       }

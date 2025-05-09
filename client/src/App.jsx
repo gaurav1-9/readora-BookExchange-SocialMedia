@@ -32,9 +32,6 @@ const App = () => {
         setLoading(false)
       })
   }, [setIsLoggedIn, setUser])
-  console.log("Loading:", loading)
-  console.log("Is Logged In:", isLoggedIn)
-  console.log("user data:", user)
 
   return (
     <div className='bg-vanila h-screen w-full flex'>
@@ -43,7 +40,7 @@ const App = () => {
           : <Routes>
             <Route path='/' element={(isLoggedIn) ? <Home /> : <Navigate to='/auth/login' replace />} >
               <Route index element={<Feed />} />
-              <Route path="/account" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/chats" element={<Chats />} />
             </Route>
             <Route path='/auth' element={(isLoggedIn) ? <Navigate to="/" replace /> : <Authentication />}>

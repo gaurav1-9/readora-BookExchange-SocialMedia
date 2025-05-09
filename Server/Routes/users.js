@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const userSchema = require('../Models/userSchema')
+const mongoose = require('mongoose')
 
 router.get("/", (req, res) => {
     res.send({
@@ -20,6 +21,23 @@ router.get("/:id", async (req, res) => {
             err: true,
             msg: "No user found",
         });
+    }
+});
+
+router.get("/details/following", async (req, res) => {
+    try {
+        const idsParam = req.query.ids
+        if (!idsParam) {
+            return res.status(400).json({ message: 'No IDs provided' })
+        }
+        const idsArray = idsParam.split(',').map(id => id.trim())
+
+        const users = await userSchema.find({ _id: { $in: idsArray } }).select('_id username name')
+
+        res.json(users)
+    } catch (err) {
+        console.error('Error fetching users by IDs:', err)
+        res.status(500).json({ message: 'Server error' })
     }
 });
 

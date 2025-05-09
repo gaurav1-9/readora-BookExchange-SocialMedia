@@ -66,6 +66,7 @@ router.post("/login", async (req, res) => {
 
 router.get('/session', (req, res) => {
     if (req.session.user) {
+        console.log(req.session.user)
         res.json({
             user: req.session.user,
             sessionId: req.sessionID // send this only for debugging
@@ -86,13 +87,23 @@ router.post('/logout', (req, res) => {
     })
 })
 
-router.get("/me", (req, res) => {
-    if (req.session.user) {
-      return res.status(200).json({ user: req.session.user })
+router.get("/me", async (req, res) => {
+  if (req.session.user) {
+    console.log(req.session.user)
+    try {
+      const user = await UserSchema.findById(req.session.user);
+      if (!user) {
+        return res.status(404).json({ msg: "User not found" });
+      }
+      res.status(200).json({ user });
+    } catch (err) {
+      res.status(500).json({ msg: "Server Error" });
     }
-    res.status(401).json({ msg: "Unauthorized" })
-  })
-  
+  } else {
+    res.status(401).json({ msg: "Not authenticated" });
+  }
+});
+
 
 
 module.exports = router

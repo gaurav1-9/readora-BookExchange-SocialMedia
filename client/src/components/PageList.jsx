@@ -29,7 +29,7 @@ const PageList = () => {
             <div className="w-8/9 h-fit bg-gunMetal p-4 rounded-xl mt-6">
                 <ul className='flex flex-col gap-3'>
                     <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
-                        <Link to="/account" className="flex gap-2 items-center">
+                        <Link to="/profile" className="flex gap-2 items-center">
                             <HiUserCircle />
                             Account
                         </Link>
