@@ -10,10 +10,22 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
 
-    const handleRegister = () => { }
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        setError('')
 
-    const navigateToLogIn =()=>{
-        navigate('/auth/login', {replace:true})
+        console.log(name)
+        console.log(email)
+        console.log(username)
+        console.log(password)
+        setEmail('')
+        setName('')
+        setPassword('')
+        setUsername('')
+    }
+
+    const navigateToLogIn = () => {
+        navigate('/auth/login', { replace: true })
     }
     return (
         <form onSubmit={handleRegister} className='w-full max-w-md flex flex-col px-10'>
@@ -26,7 +38,7 @@ const Register = () => {
                 required
             />
             <input
-                className="mb-4 p-2 border rounded-xl outline-none lowercase"
+                className="mb-4 p-2 border rounded-xl outline-none lowercase placeholder:capitalize"
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -34,7 +46,7 @@ const Register = () => {
                 required
             />
             <input
-                className="mb-4 p-2 border rounded-xl outline-none lowercase"
+                className="mb-4 p-2 border rounded-xl outline-none lowercase placeholder:capitalize"
                 type="text"
                 placeholder="Username"
                 value={username}
@@ -43,7 +55,7 @@ const Register = () => {
             />
             <div className="relative flex items-center">
                 <input
-                    className="mb-4 p-2 w-full border rounded-xl outline-none pr-8"
+                    className={`mb-4 p-2 w-full border rounded-xl outline-none pr-8 ${!showPassword ? 'font-extrabold tracking-widest' : 'font-normal'} placeholder:tracking-normal placeholder:font-normal`}
                     type={(showPassword) ? "text" : "password"}
                     placeholder="Password"
                     value={password}

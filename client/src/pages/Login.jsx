@@ -7,13 +7,18 @@ const Login = () => {
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
-  
-  const handleLogin = () => {
 
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setError('')
+    console.log(username)
+    console.log(password)
+    setUsername('')
+    setPassword('')
   }
 
-  const navigateToReg = ()=>{
-    navigate('/auth/register', {replace:true})
+  const navigateToReg = () => {
+    navigate('/auth/register', { replace: true })
   }
 
   return (
@@ -28,7 +33,7 @@ const Login = () => {
       />
       <div className="relative flex items-center">
         <input
-          className="mb-4 p-2 w-full border rounded-xl outline-none pr-8"
+          className={`mb-4 p-2 w-full border rounded-xl outline-none pr-8 ${!showPassword? 'font-extrabold tracking-widest': 'font-normal'} placeholder:tracking-normal placeholder:font-normal`}
           type={(showPassword) ? "text" : "password"}
           placeholder="Password"
           value={password}
@@ -53,7 +58,7 @@ const Login = () => {
       <div className='flex items-center mt-3 gap-1 justify-center'>
         <span>New user? </span>
         <span to="/auth/register" className="text-gunMetal cursor-pointer text-center hover:underline hover:text-azul font-semibold" onClick={navigateToReg}>
-        Click here
+          Click here
         </span>
       </div>
     </form>
