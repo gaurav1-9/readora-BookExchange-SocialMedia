@@ -1,8 +1,11 @@
 import React from 'react'
+import { useAuth } from '../AuthContext'
+import { ProfileUserDetails } from '../components/ProfileUserDetails'
 
 const Profile = () => {
+  const { user } = useAuth()
   return (
-    <div>Profile</div>
+    <ProfileUserDetails user={user}/>
   )
 }
 

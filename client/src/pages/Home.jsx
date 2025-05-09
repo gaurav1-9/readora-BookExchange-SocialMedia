@@ -6,7 +6,6 @@ import { useAuth } from '../AuthContext'
 
 const Home = () => {
   const {user} = useAuth()
-  console.log(user.followings)
   return (
     <div className='flex w-screen'>
       <PageList />

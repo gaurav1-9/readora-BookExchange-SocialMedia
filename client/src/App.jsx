@@ -13,7 +13,7 @@ import axios from 'axios'
 import Followers from './pages/Followers'
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn, setUser, user } = useAuth()
+  const { isLoggedIn, setIsLoggedIn, setUser } = useAuth()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
