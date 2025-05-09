@@ -10,7 +10,7 @@ const Home = () => {
     <div className='flex w-screen'>
       <PageList />
       <div className='flex-2'>
-        <Outlet /> {/* Renders Feed, Account, or Chats based on the route */}
+        <Outlet />
       </div>
       <FriendList followingList={user.followings}/>
     </div>
