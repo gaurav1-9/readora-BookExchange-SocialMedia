@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
+
+    const handleRegister = () => { }
+
+    const navigateToLogIn =()=>{
+        navigate('/auth/login', {replace:true})
+    }
     return (
         <form onSubmit={handleRegister} className='w-full max-w-md flex flex-col px-10'>
             <input
@@ -53,9 +67,9 @@ const Register = () => {
 
             <div className='flex items-center mt-3 gap-1 justify-center'>
                 <span>Already have an account? </span>
-                <Link to="/login" className="text-gunMetal cursor-pointer text-center hover:underline hover:text-azul font-semibold">
+                <span to="/auth/login" className="text-gunMetal cursor-pointer text-center hover:underline hover:text-azul font-semibold" onClick={navigateToLogIn}>
                     Login here
-                </Link>
+                </span>
             </div>
         </form>
     )

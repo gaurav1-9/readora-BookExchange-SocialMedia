@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
   
   const handleLogin = () => {
 
+  }
+
+  const navigateToReg = ()=>{
+    navigate('/auth/register', {replace:true})
   }
 
   return (
@@ -46,9 +52,9 @@ const Login = () => {
 
       <div className='flex items-center mt-3 gap-1 justify-center'>
         <span>New user? </span>
-        {/* <Link to="/register" className="text-gunMetal cursor-pointer text-center hover:underline hover:text-azul font-semibold"> */}
+        <span to="/auth/register" className="text-gunMetal cursor-pointer text-center hover:underline hover:text-azul font-semibold" onClick={navigateToReg}>
         Click here
-        {/* </Link> */}
+        </span>
       </div>
     </form>
   )
