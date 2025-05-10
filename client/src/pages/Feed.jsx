@@ -15,7 +15,25 @@ const Feed = () => {
     const fetchFeed = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/posts/${user._id}/timeline`);
-        setFeedPosts(res.data.msg);
+        const posts = res.data.msg;
+
+        const userIds = [...new Set(posts.map(p => p.userId))];
+        const userDetailsRes = await axios.get(
+          `http://localhost:5000/api/users/details/following`,
+          { params: { ids: userIds.join(',') } }
+        );
+
+        const userMap = {};
+        userDetailsRes.data.forEach(u => {
+          userMap[u._id] = u.username;
+        });
+
+        const enrichedPosts = posts.map(post => ({
+          ...post,
+          username: userMap[post.userId] || 'Unknown'
+        }));
+
+        setFeedPosts(enrichedPosts);
       } catch (err) {
         console.error("Failed to load feed:", err);
       } finally {
@@ -26,6 +44,7 @@ const Feed = () => {
     fetchFeed();
   }, [user]);
 
+
   return (
     <div className="p-4 mt-10">
       {/* Section 1: Create Post */}
@@ -33,13 +52,12 @@ const Feed = () => {
         <p className="text-gray-600">Create post section (coming soon...)</p>
       </div>
 
-      {/* Section 2: Feed */}
       <div>
         {
           loading ? (
             <p>Loading feed...</p>
           ) : feedPosts.length === 0 ? (
-            <NoPost/>
+            <NoPost />
           ) : (
             feedPosts.map((post, idx) => (
               <>
