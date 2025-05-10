@@ -27,7 +27,7 @@ const FriendList = ({ followingList }) => {
   }, [followingList])
 
   return (
-    <div className='flex-1 h-screen sticky top-0 items-center pt-10'>
+    <div className='flex-1 h-screen sticky top-0 items-center pt-10 pl-5'>
       <div className='w-8/9 mt-3 bg-gunMetal rounded-xl p-4 '>
         <div className='flex items-center gap-2 mb-4'>
           <FaUserFriends className='text-babyPowder text-2xl' />

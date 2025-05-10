@@ -41,6 +41,25 @@ router.get("/details/following", async (req, res) => {
     }
 });
 
+router.post('/toggle-follow', async (req, res) => {
+  const { userId, targetUserId } = req.body;
+
+  try {
+    const user = await userSchema.findById(userId);
+
+    if (user.followings.includes(targetUserId)) {
+      user.followings.pull(targetUserId);
+    } else {
+      user.followings.push(targetUserId);
+    }
+
+    await user.save();
+    res.status(200).json({ msg: 'Follow state updated.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update follow state' });
+  }
+});
+
 //update
 router.put("/:id", async (req, res) => {
     const userIdUpdate = req.params.id
