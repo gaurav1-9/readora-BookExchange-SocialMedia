@@ -9,20 +9,19 @@ const Profile = () => {
   const [posts, setPosts] = useState([])
   const [postLoader, setPostLoader] = useState(true)
 
+  const fetchPosts = async () => {
+  if (!user?._id) return;
+  try {
+    const res = await axios.get(`http://localhost:5000/api/posts/${user._id}/profilePost`, {
+      withCredentials: true
+    });
+    setPosts(res.data.msg);
+    setPostLoader(false);
+  } catch (err) {
+    console.error("Error fetching profile posts:", err.response?.data?.msg || err.message);
+  }
+};
   useEffect(() => {
-    const fetchPosts = async () => {
-      if (!user?._id) return;
-      try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${user._id}/profilePost`, {
-          withCredentials: true
-        })
-        setPosts(res.data.msg)
-        setPostLoader(false)
-      } catch (err) {
-        console.error("Error fetching profile posts:", err.response?.data?.msg || err.message)
-      }
-    }
-
     fetchPosts()
   }, [user])
 
@@ -32,7 +31,7 @@ const Profile = () => {
       {
         (postLoader)
           ? <p className='mt-10 text-center text-xl font-light text-gunMetal'>Loading...</p>
-          : <ProfilePosts postList={posts} uploader={user}/>
+          : <ProfilePosts postList={posts} uploader={user} onPostUpdate={fetchPosts}/>
           
       }
     </div>
