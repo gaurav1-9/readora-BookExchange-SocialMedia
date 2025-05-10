@@ -1,11 +1,12 @@
 import React from 'react'
+import UploadedPosts from './UploadedPosts'
 
-const ProfilePosts = ({ postList }) => {
+const ProfilePosts = ({ postList, uploader }) => {
     return (
-        <div className='mt-10'>
+        <div>
             {
                 (postList.length)
-                    ? <p>s</p>
+                    ? <UploadedPosts posts={postList} uploader={uploader}/>
                     : <div className='flex items-end justify-center gap-4'>
                         <img src="/noPost.png" alt="" className='w-80' />
                         <div className="flex flex-col justify-start mb-10">

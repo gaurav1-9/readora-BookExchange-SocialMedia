@@ -36,7 +36,7 @@ const App = () => {
   }, [setIsLoggedIn, setUser])
 
   return (
-    <div className='bg-vanila h-screen w-full flex'>
+    <div className='bg-vanila min-h-screen w-full flex'>
       {
         (loading) ? "Loading"
           : <Routes>

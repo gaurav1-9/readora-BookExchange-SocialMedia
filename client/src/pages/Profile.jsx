@@ -27,14 +27,15 @@ const Profile = () => {
   }, [user])
 
   return (
-    <>
+    <div>
       <ProfileUserDetails user={user} />
       {
         (postLoader)
           ? <p className='mt-10 text-center text-xl font-light text-gunMetal'>Loading...</p>
-          : <ProfilePosts postList={posts} />
+          : <ProfilePosts postList={posts} uploader={user}/>
+          
       }
-    </>
+    </div>
   )
 }
 

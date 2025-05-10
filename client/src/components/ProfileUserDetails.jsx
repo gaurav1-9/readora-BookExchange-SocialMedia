@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const ProfileUserDetails = ({user}) => {
   return (
-    <div className='pt-10 px-4'>
+    <div className='pt-10 px-4 sticky top-0 bg-vanila pb-5'>
       <div className="flex gap-3 items-center">
         <img src={user.profilePic || "/default-pic.png"} className='rounded-full w-40 border-8 border-azul' />
         <div className="flex flex-col">
