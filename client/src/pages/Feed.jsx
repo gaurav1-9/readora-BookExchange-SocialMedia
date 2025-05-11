@@ -3,11 +3,47 @@ import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import PostCard from '../components/PostCard'; // create this component to show individual posts
 import NoPost from '../components/NoPost';
+import CreatePost from '../components/CreatePost';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Feed = () => {
   const { user } = useAuth();
   const [feedPosts, setFeedPosts] = useState([]);
+  const [caption, setCaption] = useState('')
+  const [tags, setTags] = useState([])
   const [loading, setLoading] = useState(true);
+  const [postUploading, setPostUploading] = useState(false)
+
+  const successPost = () => toast("Post has been uploaded to your account!",
+    {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    })
+
+  const uploadPost = async (e) => {
+    e.preventDefault()
+    const postUploadData = {
+      userId: user._id,
+      caption: caption,
+      tags: tags,
+    }
+    setTags('')
+    setCaption('')
+    setPostUploading(true)
+    try {
+      const res = await axios.post('http://localhost:5000/api/posts/upload', postUploadData, { withCredentials: true })
+      if (!res.data?.err) successPost()
+      setPostUploading(false)
+    } catch {
+      setPostUploading(false)
+    }
+  }
 
   useEffect(() => {
     if (!user?._id) return;
@@ -47,12 +83,21 @@ const Feed = () => {
 
   return (
     <div className="p-4 mt-10">
-      {/* Section 1: Create Post */}
-      <div className="p-4 border rounded-lg shadow-sm bg-white mb-5">
-        <p className="text-gray-600">Create post section (coming soon...)</p>
-      </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
+      <CreatePost caption={caption} setCaption={setCaption} tags={tags} setTags={setTags} onUpload={uploadPost} isUploading={postUploading} />
 
-      <div>
+      <div className='mt-5'>
         {
           loading ? (
             <p>Loading feed...</p>

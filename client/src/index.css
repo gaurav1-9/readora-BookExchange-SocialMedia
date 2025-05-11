@@ -14,3 +14,24 @@
 *{
   font-family: var(--font-urbanist);
 }
+
+.custom-scroll::-webkit-scrollbar{
+  background-color: var(--color-gunMetal);
+  width: 15px;
+}
+
+.custom-scroll::-webkit-scrollbar-track{
+  border-radius: 4px;
+  background-color: transparent;
+  margin-block: 4px;
+  padding-right: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb{
+  background-color:#F5EE9Ecc;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover{
+  background-color: var(--color-vanila);
+}
