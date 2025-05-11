@@ -140,7 +140,7 @@ router.put("/:postId/engage", async (req, res) => {
 router.get("/:id/profilePost", async (req, res) => {
     const profileID = req.params.id;
     try {
-        const userPosts = await PostSchema.find({ userId: profileID });
+        const userPosts = await PostSchema.find({ userId: profileID }).sort({ createdAt: -1 });
         if (!userPosts) return res.status(400).json({
             err: true,
             msg: "No posts uploaded"

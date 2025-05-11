@@ -32,7 +32,7 @@ router.get('/post', async (req, res) => {
                 { caption: { $regex: postQuery, $options: "i" } },
                 { tags: { $regex: postQuery, $options: "i" } }
             ]
-        })
+        }).sort({ createdAt: -1 })
 
         res.status(200).json({
             err: false,

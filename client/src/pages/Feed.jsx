@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard'; // create this component to show 
 import NoPost from '../components/NoPost';
 import CreatePost from '../components/CreatePost';
 import { ToastContainer, toast } from 'react-toastify';
+import CaughtUp from '../components/CaughtUp';
 
 const Feed = () => {
   const { user } = useAuth();
@@ -103,18 +104,22 @@ const Feed = () => {
             <p>Loading feed...</p>
           ) : feedPosts.length === 0 ? (
             <NoPost />
-          ) : (
-            feedPosts.map((post, idx) => (
-              <>
-                <PostCard key={post._id} post={post} />
-                {
-                  idx < feedPosts.length - 1
-                    ? <div className='w-full h-0.5 rounded-2xl bg-gunMetal/60 mt-2 mb-5'></div>
-                    : <div className='mb-5'></div>
-                }
-              </>
-            ))
           )
+            : <>
+              {
+                feedPosts.map((post, idx) => (
+                  <>
+                    <PostCard key={post._id} post={post} />
+                    {
+                      idx < feedPosts.length - 1
+                        ? <div className='w-full h-0.5 rounded-2xl bg-gunMetal/60 mt-2 mb-5'></div>
+                        : <div className='mb-5'></div>
+                    }
+                  </>
+                ))
+              }
+              <CaughtUp/>
+            </>
         }
       </div>
     </div>
