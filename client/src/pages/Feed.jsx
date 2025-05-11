@@ -108,14 +108,14 @@ const Feed = () => {
             : <>
               {
                 feedPosts.map((post, idx) => (
-                  <>
-                    <PostCard key={post._id} post={post} />
+                  <div key={post._id}>
+                    <PostCard post={post} />
                     {
                       idx < feedPosts.length - 1
                         ? <div className='w-full h-0.5 rounded-2xl bg-gunMetal/60 mt-2 mb-5'></div>
                         : <div className='mb-5'></div>
                     }
-                  </>
+                  </div>
                 ))
               }
               <CaughtUp/>

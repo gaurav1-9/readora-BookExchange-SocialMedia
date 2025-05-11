@@ -31,7 +31,6 @@ const OtherProfiles = () => {
 
         fetchUser()
     }, [targetUser])
-console.log(profilePosts)
     return (
         <div>
             {
