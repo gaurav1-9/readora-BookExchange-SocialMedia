@@ -2,7 +2,7 @@ import React from 'react'
 
 const SearchBar = ({ selected, handleSelection, onSearch, searchVal, setSearch }) => {
     return (
-        <div className="bg-gunMetal flex flex-col h-full w-full rounded-2xl">
+        <div className="sticky top-14 bg-gunMetal flex flex-col h-full w-full rounded-2xl">
             <div className="flex items-center gap-2 p-4">
                 <p className='text-babyPowder font-semibold'>Search for:</p>
                 <p
