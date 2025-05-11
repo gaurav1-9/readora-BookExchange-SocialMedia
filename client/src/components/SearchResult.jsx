@@ -30,7 +30,7 @@ const SearchResult = ({ hasSearched, res, searchType, searching }) => {
                 (!searchType)
                     ? res.map((item) => (
                         <div key={item._id} className={`flex ${(res.length === 1) ? "w-full" : "w-[47%]"} bg-gunMetal/10 rounded-xl p-4 justify-between hover:bg-gunMetal/16 cursor-pointer`}>
-                            <Link to={(item._id===user._id)?"/profile":""} className="flex items-center gap-6">
+                            <Link to={(item._id===user._id)?"/profile":`/user/${item._id}`} className="flex items-center gap-6">
                                 <img src="/default-pic.png" alt="" className='w-16 rounded-full' />
                                 <div className="flex flex-col">
                                     <p className='text-2xl font-semibold leading-5'>{item.username}</p>
@@ -60,7 +60,7 @@ const SearchResult = ({ hasSearched, res, searchType, searching }) => {
                                             })}
                                         </span>
                                     </div>
-                                    <Link to={(item.userId===user._id)?"/profile":""}>
+                                    <Link to={(item.userId===user._id)?"/profile":`/user/${item.userId}`}>
                                         <GoLinkExternal className='text-2xl text-gunMetal hover:text-gunMetal/70 cursor-pointer' onClick={() => console.log(item.userId)} />
                                     </Link>
                                 </div>

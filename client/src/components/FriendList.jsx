@@ -40,9 +40,9 @@ const FriendList = ({ followingList }) => {
           followingData.map((item, index) => (
             <div key={index} className='flex p-2 rounded-xl justify-between items-center'>
               <div className='flex' onClick={() => console.log(item)}>
-                <img src={item.profilePic || '/default-pic.png'} alt="Friend" className="w-10 h-10 rounded-full cursor-pointer" draggable='false' />
+                <img src={item.profilePic || '/default-pic.png'} alt="Friend" className="w-10 h-10 rounded-full" draggable='false' />
                 <div className='flex flex-col pl-2'>
-                  <p className='leading-3 font-semibold text-lg text-babyPowder cursor-pointer hover:text-tomato'>{item.username}</p>
+                  <Link to={`/user/${item._id}`} className='leading-3 font-semibold text-lg text-babyPowder hover:text-tomato'>{item.username}</Link>
                   <p className='leading-8 text-sm text-babyPowder'>{item.name}</p>
                 </div>
               </div>

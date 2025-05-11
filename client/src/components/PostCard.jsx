@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useAuth } from '../AuthContext';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const PostCard = ({ post }) => {
     const { user } = useAuth();
@@ -36,7 +37,7 @@ const PostCard = ({ post }) => {
         <div className='w-full rounded-xl bg-gunMetal/10 min-h-20 p-6'>
             <div className="flex flex-col">
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
+                    <Link to={`/user/${localPost._id}`} className="flex items-center gap-2">
                         <img src="/default-pic.png" alt="" className='w-10 rounded-full' />
                         <div className="flex flex-col justify-start">
                             <span className='leading-3 font-semibold text-gunMetal text-lg'>
@@ -50,7 +51,7 @@ const PostCard = ({ post }) => {
                                 })}
                             </span>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className='my-3'>
                     <p>{localPost.caption}</p>

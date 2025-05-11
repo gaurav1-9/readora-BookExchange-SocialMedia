@@ -12,6 +12,7 @@ import Following from './pages/Following'
 import axios from 'axios'
 import Followers from './pages/Followers'
 import Search from './pages/Search'
+import OtherProfiles from './pages/OtherProfiles'
 
 const App = () => {
   const { isLoggedIn, setIsLoggedIn, setUser } = useAuth()
@@ -48,6 +49,7 @@ const App = () => {
               <Route path="/followings" element={<Following />} />
               <Route path="/followers" element={<Followers />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/user/:targetUser" element={<OtherProfiles />} />
             </Route>
             <Route path='/auth' element={(isLoggedIn) ? <Navigate to="/" replace /> : <Authentication />}>
               <Route index element={<Navigate to="login" replace />} />

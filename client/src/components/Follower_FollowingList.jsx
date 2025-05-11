@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuth } from '../AuthContext'
 import { FaUserMinus, FaUserPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Follower_FollowingList = ({ listType, loading, list, userFollowings, onToggleFollow }) => {
     const { user } = useAuth()
@@ -30,7 +31,7 @@ const Follower_FollowingList = ({ listType, loading, list, userFollowings, onTog
                                             <div className="flex items-center gap-6">
                                                 <img src="/default-pic.png" alt="" className='w-16 rounded-full' />
                                                 <div className="flex flex-col">
-                                                    <p className='text-2xl font-semibold leading-5'>{item.username}</p>
+                                                    <Link to={`/user/${item._id}`} className='text-2xl font-semibold leading-5'>{item.username}</Link>
                                                     <p className='text-xl'>{item.name}</p>
                                                 </div>
                                             </div>
