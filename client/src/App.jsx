@@ -11,6 +11,7 @@ import Chats from './pages/Chats'
 import Following from './pages/Following'
 import axios from 'axios'
 import Followers from './pages/Followers'
+import Search from './pages/Search'
 
 const App = () => {
   const { isLoggedIn, setIsLoggedIn, setUser } = useAuth()
@@ -46,6 +47,7 @@ const App = () => {
               <Route path="/chats" element={<Chats />} />
               <Route path="/followings" element={<Following />} />
               <Route path="/followers" element={<Followers />} />
+              <Route path="/search" element={<Search />} />
             </Route>
             <Route path='/auth' element={(isLoggedIn) ? <Navigate to="/" replace /> : <Authentication />}>
               <Route index element={<Navigate to="login" replace />} />

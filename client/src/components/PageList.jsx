@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { HiUserCircle } from "react-icons/hi"
 import { FaHome } from "react-icons/fa"
-import { IoLogOut } from "react-icons/io5"
+import { IoLogOut, IoSearch } from "react-icons/io5"
 import { MdMessage } from "react-icons/md"
 import axios from 'axios'
 import { useAuth } from '../AuthContext'
@@ -35,15 +35,21 @@ const PageList = () => {
                         </Link>
                     </li>
                     <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
-                        <Link to="/chats" className="flex gap-2 items-center">
-                            <MdMessage />
-                            Chats
-                        </Link>
-                    </li>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
                         <Link to="/" className="flex gap-2 items-center">
                             <FaHome />
                             Home
+                        </Link>
+                    </li>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                        <Link to="/search" className="flex gap-2 items-center">
+                            <IoSearch />
+                            Search
+                        </Link>
+                    </li>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                        <Link to="/chats" className="flex gap-2 items-center">
+                            <MdMessage />
+                            Chats
                         </Link>
                     </li>
                     <li
