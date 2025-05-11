@@ -74,7 +74,7 @@ const UploadedPosts = ({ posts, uploader, onPostUpdate }) => {
         );
 
         // Send to backend
- 
+
         axios.put(`http://localhost:5000/api/posts/${updatedPost._id}/edit`, updatedPost, {
             headers: {
                 'Content-Type': 'application/json'
@@ -94,23 +94,23 @@ const UploadedPosts = ({ posts, uploader, onPostUpdate }) => {
 
 
     const handleDeleteConfirm = () => {
-    axios.delete(`http://localhost:5000/api/posts/${deletePostId._id}/deletePost`, {
-        data: { userId: user._id }, // body for the DELETE request
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            console.log("✅ Deleted Post from server:", response.data);
-            // Optimistically update UI
-            setLocalPosts(prev => prev.filter(post => post._id !== deletePostId._id));
-            setDeletePostId(null);
-            onPostUpdate();
+        axios.delete(`http://localhost:5000/api/posts/${deletePostId._id}/deletePost`, {
+            data: { userId: user._id }, // body for the DELETE request
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        .catch(error => {
-            console.error("❌ Error deleting post:", error);
-        });
-};
+            .then(response => {
+                console.log("✅ Deleted Post from server:", response.data);
+                // Optimistically update UI
+                setLocalPosts(prev => prev.filter(post => post._id !== deletePostId._id));
+                setDeletePostId(null);
+                onPostUpdate();
+            })
+            .catch(error => {
+                console.error("❌ Error deleting post:", error);
+            });
+    };
 
 
     return (
@@ -133,10 +133,13 @@ const UploadedPosts = ({ posts, uploader, onPostUpdate }) => {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="flex gap-6 text-xl text-gunMetal cursor-pointer">
-                                    <FaRegEdit className='hover:text-azul' onClick={() => setEditPostId(item)} />
-                                    <RiDeleteBin5Fill className='hover:text-[#c44141]' onClick={() => setDeletePostId(item)} />
-                                </div>
+                                {
+                                    (uploader._id === user._id)
+                                        ? <div className="flex gap-6 text-xl text-gunMetal cursor-pointer">
+                                            <FaRegEdit className='hover:text-azul' onClick={() => setEditPostId(item)} />
+                                            <RiDeleteBin5Fill className='hover:text-[#c44141]' onClick={() => setDeletePostId(item)} />
+                                        </div> : null
+                                }
                             </div>
                             <div className='my-3'>
                                 <p>{item.caption}</p>
