@@ -4,9 +4,11 @@ import SearchBar from '../components/SearchBar'
 const Search = () => {
     const [selected, setSelected] = useState(0)
     const [search, setSearch] = useState('')
+
     const handleSelection = (selectionId) => {
         setSelected(selectionId)
     }
+    
     const onSearch = (e)=>{
         e.preventDefault()
         console.log(search)
