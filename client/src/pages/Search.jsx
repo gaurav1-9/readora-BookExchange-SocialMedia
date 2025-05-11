@@ -28,7 +28,6 @@ const Search = () => {
         setSearching(false)
         setSearch('')
     }
-    console.log(result)
     return (
         <div className='mt-14'>
             <SearchBar selected={selected} handleSelection={handleSelection} onSearch={onSearch} setSearch={setSearch} searchVal={search} />

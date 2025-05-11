@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { HiUserCircle } from "react-icons/hi"
 import { FaHome } from "react-icons/fa"
@@ -10,7 +10,8 @@ import Logo from './Logo'
 
 const PageList = () => {
     const navigate = useNavigate()
-    const { setIsLoggedIn, setUser } = useAuth()
+    const { setIsLoggedIn, setUser, user } = useAuth()
+    const [color, setColor] = useState(false)
 
     const handleLogOut = async () => {
         try {
@@ -28,10 +29,13 @@ const PageList = () => {
             <Logo />
             <div className="w-8/9 h-fit bg-gunMetal p-4 rounded-xl mt-6">
                 <ul className='flex flex-col gap-3'>
-                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
+                    <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal -mb-2' onMouseEnter={()=>setColor(true)} onMouseLeave={()=>setColor(false)}>
                         <Link to="/profile" className="flex gap-2 items-center">
                             <HiUserCircle />
-                            Account
+                            <div>
+                                <p>Account</p>
+                                <p className={`${(!color)?"text-babyPowder/40":"text-gunMetal/80"} text-sm leading-1.5 mb-2 font-light tracking-wider`}>{user.username}</p>
+                            </div>
                         </Link>
                     </li>
                     <li className='p-2 text-2xl text-babyPowder font-semibold cursor-pointer rounded-md hover:bg-tomato hover:text-gunMetal'>
