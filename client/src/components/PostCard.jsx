@@ -37,7 +37,7 @@ const PostCard = ({ post }) => {
         <div className='w-full rounded-xl bg-gunMetal/10 min-h-20 p-6'>
             <div className="flex flex-col">
                 <div className="flex justify-between items-center">
-                    <Link to={`/user/${localPost._id}`} className="flex items-center gap-2">
+                    <Link to={`/user/${localPost.userId}`} className="flex items-center gap-2">
                         <img src="/default-pic.png" alt="" className='w-10 rounded-full' />
                         <div className="flex flex-col justify-start">
                             <span className='leading-3 font-semibold text-gunMetal text-lg'>
