@@ -61,7 +61,7 @@ const SearchResult = ({ hasSearched, res, searchType, searching }) => {
                                         </span>
                                     </div>
                                     <Link to={(item.userId===user._id)?"/profile":`/user/${item.userId}`}>
-                                        <GoLinkExternal className='text-2xl text-gunMetal hover:text-gunMetal/70 cursor-pointer' onClick={() => console.log(item.userId)} />
+                                        <GoLinkExternal className='text-2xl text-gunMetal hover:text-gunMetal/70 cursor-pointer' />
                                     </Link>
                                 </div>
                             ))
