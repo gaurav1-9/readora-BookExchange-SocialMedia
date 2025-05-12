@@ -29,7 +29,7 @@ const Search = () => {
         setSearch('')
     }
     return (
-        <div className='mt-14'>
+        <div>
             <SearchBar selected={selected} handleSelection={handleSelection} onSearch={onSearch} setSearch={setSearch} searchVal={search} />
             <SearchResult hasSearched={hasSearched} res={result} searchType={selected} searching={searching} />
         </div>

@@ -45,7 +45,7 @@ const SearchResult = ({ hasSearched, res, searchType, searching }) => {
                                 <div key={item._id} className='w-full rounded-xl bg-gunMetal/10 min-h-10 p-4 flex justify-between items-center mb-2'>
                                     <div className="flex flex-col">
                                         <p>{item.caption}</p>
-                                        <div className="flex gap-2 flex-wrap">
+                                        <div className="mt-2 flex gap-2 flex-wrap">
                                             {item.tags.map((tag, i) => (
                                                 <div key={i} className="text-sm px-2 py-1 bg-tomato/40 text-gunMetal rounded-4xl min-w-10">
                                                     <p>#{tag}</p>

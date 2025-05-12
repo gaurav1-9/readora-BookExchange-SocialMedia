@@ -2,7 +2,8 @@ import React from 'react'
 
 const SearchBar = ({ selected, handleSelection, onSearch, searchVal, setSearch }) => {
     return (
-        <div className="sticky top-14 bg-gunMetal flex flex-col h-full w-full rounded-2xl">
+        <div className='sticky top-0 bg-vanila pt-14 rounded-b-2xl'>
+            <div className="bg-gunMetal flex flex-col h-full w-full rounded-2xl">
             <div className="flex items-center gap-2 p-4">
                 <p className='text-babyPowder font-semibold'>Search for:</p>
                 <p
@@ -28,6 +29,7 @@ const SearchBar = ({ selected, handleSelection, onSearch, searchVal, setSearch }
                 />
                 <button className='w-2/12 text-babyPowder font-semibold bg-azul hover:bg-azul/90 rounded-lg cursor-pointer py-1'>Search</button>
             </form>
+        </div>
         </div>
     )
 }
