@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import { LuMessagesSquare } from "react-icons/lu";
 import ChatList from '../components/ChatList';
+import NoChats from '../components/NoChats';
 
 
 const Chats = () => {
@@ -38,7 +39,7 @@ const Chats = () => {
       </div>
       {
         chats.length === 0
-          ? <p>No chats available</p>
+          ? <NoChats/>
           : <ChatList chats={chats} user={user}/>
       }
     </div>
