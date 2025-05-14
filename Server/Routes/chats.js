@@ -14,8 +14,8 @@ router.post("/", async (req, res) => {
         let chat = await Chat.findOne({
             users: { $all: [req.body.myUserId, userId] }
         })
-        .populate('users', '-password')
-        .populate('latestMessage');
+            .populate('users', '-password')
+            .populate('latestMessage');
 
         if (chat) {
             chat = await User.populate(chat, {
@@ -103,8 +103,14 @@ router.get("/message", async (req, res) => {
 
     try {
         const messages = await Message.find({ chat: chatId })
-            .populate('sender', 'name username profilePicture')
-            .populate('chat');
+            .populate('sender', 'name username')
+            .populate({
+                path: 'chat',
+                populate: {
+                    path: 'users',
+                    select: 'name username'
+                }
+            });
 
         res.status(200).json({ err: false, msg: messages });
 
