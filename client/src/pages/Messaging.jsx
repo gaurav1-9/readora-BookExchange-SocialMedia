@@ -13,11 +13,35 @@ const Messaging = () => {
     const [chats, setChats] = useState([])
     const [msgInput, setMsgInput] = useState('')
 
-    const sendMsg = (e) => {
-        e.preventDefault()
-        console.log(msgInput)
-        setMsgInput('')
-    }
+    const sendMsg = async (e) => {
+        e.preventDefault();
+        if (!msgInput.trim()) return;
+
+        const newMsg = {
+            _id: Date.now(), // Temporary ID for React rendering
+            content: msgInput,
+            sender: {
+                _id: user._id,
+            },
+            createdAt: new Date().toISOString(),
+        };
+
+        // Optimistically update UI
+        setChats(prev => [...prev, newMsg]);
+        setMsgInput('');
+
+        try {
+            const res = await axios.post(`http://localhost:5000/api/chats/message`, {
+                myUserId: user._id,
+                chatId: chatId,
+                content: msgInput,
+            });
+        } catch (err) {
+            console.error("Message failed to send", err);
+            // Optionally handle errors (like showing retry option)
+        }
+    };
+
 
     useEffect(() => {
         const fetchMsg = async () => {
@@ -34,7 +58,6 @@ const Messaging = () => {
 
         fetchMsg();
     }, [chatId])
-    console.log(chats)
 
     return (
         <div className='min-h-screen flex flex-col'>
@@ -53,7 +76,7 @@ const Messaging = () => {
 
                         {/* Scrollable Message Section */}
                         <div className="flex-1 overflow-y-auto px-4">
-                            <MsgBubbles chats={chats}/>
+                            <MsgBubbles chats={chats} />
                         </div>
 
                         {/* Input Section */}

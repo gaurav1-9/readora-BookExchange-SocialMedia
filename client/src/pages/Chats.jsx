@@ -38,7 +38,7 @@ const Chats = () => {
         <span className='text-gunMetal text-4xl font-semibold'>Your Chats</span>
       </div>
       {
-        chats.length === 0
+        (chats.length === 0)
           ? <NoChats/>
           : <ChatList chats={chats} user={user}/>
       }
