@@ -10,6 +10,13 @@ const Messaging = () => {
     const { user } = useAuth()
     const [loading, setLoading] = useState(true)
     const [chats, setChats] = useState([])
+    const [msgInput, setMsgInput] = useState('')
+
+    const sendMsg = (e)=>{
+        e.preventDefault()
+        console.log(msgInput)
+        setMsgInput('')
+    }
 
     useEffect(() => {
         const fetchMsg = async () => {
@@ -50,7 +57,7 @@ const Messaging = () => {
 
                         {/* Input Section */}
                         <div className='sticky bottom-0 bg-vanila z-10'>
-                            <MsgInput />
+                            <MsgInput sendMsg={sendMsg} msg={msgInput} setMsg={setMsgInput}/>
                         </div>
                     </>
             }
