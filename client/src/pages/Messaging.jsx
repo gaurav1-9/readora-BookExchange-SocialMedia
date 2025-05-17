@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 import MsgProfileDetails from '../components/MsgProfileDetails'
@@ -12,6 +12,12 @@ const Messaging = () => {
     const [loading, setLoading] = useState(true)
     const [chats, setChats] = useState([])
     const [msgInput, setMsgInput] = useState('')
+    const scrollRef = useRef()
+
+    const scrollToBottom = () => {
+        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
 
     const sendMsg = async (e) => {
         e.preventDefault();
@@ -28,6 +34,7 @@ const Messaging = () => {
 
         // Optimistically update UI
         setChats(prev => [...prev, newMsg]);
+        scrollToBottom()
         setMsgInput('');
 
         try {
@@ -59,6 +66,12 @@ const Messaging = () => {
         fetchMsg();
     }, [chatId])
 
+    useEffect(() => {
+        if (!loading) {
+            scrollToBottom();
+        }
+    }, [chats, loading]);
+
     return (
         <div className='min-h-screen flex flex-col'>
             {
@@ -76,7 +89,7 @@ const Messaging = () => {
 
                         {/* Scrollable Message Section */}
                         <div className="flex-1 overflow-y-auto px-4">
-                            <MsgBubbles chats={chats} />
+                            <MsgBubbles chats={chats} scrollRef={scrollRef} />
                         </div>
 
                         {/* Input Section */}

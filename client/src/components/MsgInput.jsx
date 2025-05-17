@@ -13,7 +13,7 @@ const MsgInput = ({ sendMsg, msg, setMsg }) => {
           placeholder='Enter your text here...'
         />
         <button>
-          <RiSendPlane2Fill className='text-3xl text-tomato hover:text-tomato/90 cursor-pointer hover:-rotate-20 ease-in-out transition-transform' />
+          <RiSendPlane2Fill className='text-3xl text-tomato hover:text-tomato/90 cursor-pointer hover:-rotate-20 ease-in transition-transform' />
         </button>
       </div>
     </form>
