@@ -4,6 +4,7 @@ import { HiUserAdd } from "react-icons/hi"
 import { FaUserMinus } from "react-icons/fa6"
 import { MdChat } from "react-icons/md"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const FollowMsg = ({ profileUser, refetchProfile }) => {
   const { user, setUser } = useAuth()
@@ -64,9 +65,9 @@ const FollowMsg = ({ profileUser, refetchProfile }) => {
               {loading ? 'Processing...' : 'Follow'}
             </button>
       }
-      <div className="p-3 rounded-full bg-azul ml-3 hover:bg-azul/87 cursor-pointer">
+      <Link to={`/chat/${profileUser._id}`} className="p-3 rounded-full bg-azul ml-3 hover:bg-azul/87 cursor-pointer">
         <MdChat className='text-xl text-babyPowder' />
-      </div>
+      </Link>
     </div>
   )
 }

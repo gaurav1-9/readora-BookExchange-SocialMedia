@@ -9,9 +9,9 @@ const ChatList = ({ chats, user }) => {
         <ul>
             {
                 chats.map(chat => (
-                    (chat.latestMessage === null)
+                    (chat.latestMessage === undefined)
                         ? null
-                        : <Link key={chat._id} to={`/msg/${chat._id}`}>
+                        : <Link key={chat._id} to={`/msg/${chat._id}/${user._id}`}>
                             <li className='flex gap-2 items-center bg-gunMetal/10 rounded-lg px-4 py-2 cursor-pointer hover:bg-gunMetal/14 mb-2'>
                                 <img src="/default-pic.png" alt="" className='w-15 rounded-full' />
                                 <div className="flex flex-col w-full">
@@ -25,7 +25,7 @@ const ChatList = ({ chats, user }) => {
                                                     </p>
                                             ))
                                         }
-                                        <DateTime dateTime={chat.createdAt} fontSize={'text-sm'}/>
+                                        <DateTime dateTime={chat.createdAt} fontSize={'text-sm'} />
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {

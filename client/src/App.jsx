@@ -14,6 +14,7 @@ import Followers from './pages/Followers'
 import Search from './pages/Search'
 import OtherProfiles from './pages/OtherProfiles'
 import Messaging from './pages/Messaging'
+import ProfileMessaging from './pages/Profilemessaging'
 
 const App = () => {
   const { isLoggedIn, setIsLoggedIn, setUser } = useAuth()
@@ -51,7 +52,8 @@ const App = () => {
               <Route path="/followers" element={<Followers />} />
               <Route path="/search" element={<Search />} />
               <Route path="/user/:targetUser" element={<OtherProfiles />} />
-              <Route path="/msg/:chatId" element={<Messaging />} />
+              <Route path="/msg/:chatId/:targetUser" element={<Messaging />} />
+              <Route path="/chat/:targetUser" element={<ProfileMessaging />} />
             </Route>
             <Route path='/auth' element={(isLoggedIn) ? <Navigate to="/" replace /> : <Authentication />}>
               <Route index element={<Navigate to="login" replace />} />

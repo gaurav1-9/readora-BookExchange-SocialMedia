@@ -39,8 +39,8 @@ const Chats = () => {
       </div>
       {
         (chats.length === 0)
-          ? <NoChats/>
-          : <ChatList chats={chats} user={user}/>
+          ? <NoChats />
+          : <ChatList chats={chats} user={user} />
       }
     </div>
   );
