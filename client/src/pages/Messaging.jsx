@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 import MsgProfileDetails from '../components/MsgProfileDetails'
 import MsgInput from '../components/MsgInput'
+import MsgBubbles from '../components/MsgBubbles'
 
 const Messaging = () => {
     const { chatId } = useParams()
@@ -12,7 +13,7 @@ const Messaging = () => {
     const [chats, setChats] = useState([])
     const [msgInput, setMsgInput] = useState('')
 
-    const sendMsg = (e)=>{
+    const sendMsg = (e) => {
         e.preventDefault()
         console.log(msgInput)
         setMsgInput('')
@@ -33,7 +34,7 @@ const Messaging = () => {
 
         fetchMsg();
     }, [chatId])
-    console.log()
+    console.log(chats)
 
     return (
         <div className='min-h-screen flex flex-col'>
@@ -52,12 +53,12 @@ const Messaging = () => {
 
                         {/* Scrollable Message Section */}
                         <div className="flex-1 overflow-y-auto px-4">
-                            <p className='text-center text-gunMetal/50 pt-10'>No messages yet.</p>
+                            <MsgBubbles chats={chats}/>
                         </div>
 
                         {/* Input Section */}
                         <div className='sticky bottom-0 bg-vanila z-10'>
-                            <MsgInput sendMsg={sendMsg} msg={msgInput} setMsg={setMsgInput}/>
+                            <MsgInput sendMsg={sendMsg} msg={msgInput} setMsg={setMsgInput} />
                         </div>
                     </>
             }

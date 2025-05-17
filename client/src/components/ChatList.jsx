@@ -1,6 +1,7 @@
 import React from 'react'
 import { GoArrowDownLeft, GoArrowUpRight } from "react-icons/go";
 import { Link } from 'react-router-dom';
+import DateTime from './DateTime';
 
 
 const ChatList = ({ chats, user }) => {
@@ -8,7 +9,7 @@ const ChatList = ({ chats, user }) => {
         <ul>
             {
                 chats.map(chat => (
-                    (chat.latestMessage === undefined)
+                    (chat.latestMessage === null)
                         ? null
                         : <Link key={chat._id} to={`/msg/${chat._id}`}>
                             <li className='flex gap-2 items-center bg-gunMetal/10 rounded-lg px-4 py-2 cursor-pointer hover:bg-gunMetal/14 mb-2'>
@@ -24,26 +25,7 @@ const ChatList = ({ chats, user }) => {
                                                     </p>
                                             ))
                                         }
-                                        <div className='flex gap-2 font-semibold text-gunMetal/50 text-sm'>
-                                            <span>
-                                                {
-                                                    new Date(chat.createdAt).toLocaleDateString('en-US', {
-                                                        year: 'numeric',
-                                                        month: 'long',
-                                                        day: 'numeric',
-                                                    })
-                                                }
-                                            </span>
-                                            <span>|</span>
-                                            <span>
-                                                {
-                                                    new Date(chat.createdAt).toLocaleTimeString('en-US', {
-                                                        hour: '2-digit',
-                                                        minute: '2-digit'
-                                                    })
-                                                }
-                                            </span>
-                                        </div>
+                                        <DateTime dateTime={chat.createdAt} fontSize={'text-sm'}/>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {
